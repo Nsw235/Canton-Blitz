@@ -1,0 +1,23 @@
+{
+  "name": "canton-blitz",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "prisma generate && tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "genkey": "node scripts/generate-master-key.js",
+    "test:crypto": "tsx src/crypto.test.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "dotenv": "^16.4.5",
+    "telegraf": "^4.16.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "prisma": "^5.22.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
