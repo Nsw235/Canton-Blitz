@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  telegramId BigInt   @unique
+  username   String?
+  createdAt  DateTime @default(now())
+  wallets    Wallet[]
+}
+
+// La clé privée n'est JAMAIS stockée en clair : seulement chiffrée (AES-256-GCM).
+model Wallet {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  user          User     @relation(fields: [userId], references: [id])
+  address       String
+  encryptedKey  String
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+}
