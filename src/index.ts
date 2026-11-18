@@ -1,4 +1,6 @@
 import 'dotenv/config';
+import { createBot } from './bot';
+import { prisma } from './db';
 
 // Vérifie la config au démarrage (échoue vite si quelque chose manque).
 for (const name of ['TELEGRAM_BOT_TOKEN', 'MASTER_KEY', 'DATABASE_URL']) {
@@ -8,4 +10,13 @@ for (const name of ['TELEGRAM_BOT_TOKEN', 'MASTER_KEY', 'DATABASE_URL']) {
   }
 }
 
-console.log('Canton Blitz : configuration OK. Le bot Telegram arrive à l’étape 3.');
+const bot = createBot(process.env.TELEGRAM_BOT_TOKEN!);
+
+bot.launch().then(() => console.log('Canton Blitz : bot démarré.'));
+
+const stop = async (signal: string) => {
+  bot.stop(signal);
+  await prisma.$disconnect();
+};
+process.once('SIGINT', () => stop('SIGINT'));
+process.once('SIGTERM', () => stop('SIGTERM'));
