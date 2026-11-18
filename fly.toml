@@ -1,0 +1,10 @@
+# Bot Telegram = processus permanent (pas de serveur web, jamais arrêté).
+app = 'canton-blitz'
+primary_region = 'ams'
+
+[build]
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1

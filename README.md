@@ -14,5 +14,5 @@ Bot Telegram de trading (Supanova / Canton Network).
 
 1. Structure + docker-compose (fait)
 2. Chiffrement AES-256-GCM des clés (fait, `src/crypto.ts`)
-3. Bot Telegraf (/start, menus)
+3. Bot Telegraf (/start, menus) (fait, `src/bot.ts`)
 4. Intégration API Supanova / Canton
